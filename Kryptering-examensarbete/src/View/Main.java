@@ -17,7 +17,7 @@ public class Main {
      */
     public static void main(String[] args)
     {
-      //HELLO DASDMASKAMDASOASMDOASDMAS  // TODO code application logic here
+      //ÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖööööÖÖÖÖÖÖ ヽ༼ຈل͜ຈ༽ﾉ RIOT OR RIOT! ヽ༼ຈل͜ຈ༽ﾉ!
     }
     
 }
