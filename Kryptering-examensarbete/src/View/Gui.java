@@ -35,6 +35,7 @@ public class Gui extends javax.swing.JFrame {
         openFileButton = new javax.swing.JButton();
         jProgressBar1 = new javax.swing.JProgressBar();
         jLabel1 = new javax.swing.JLabel();
+        output = new javax.swing.JTextField();
 
         fileChooser.setCurrentDirectory(new java.io.File("C:\\"));
 
@@ -62,6 +63,9 @@ public class Gui extends javax.swing.JFrame {
 
             jLabel1.setText("Progress:");
 
+            output.setEditable(false);
+            output.setText("Output..");
+
             javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
             getContentPane().setLayout(layout);
             layout.setHorizontalGroup(
@@ -81,11 +85,13 @@ public class Gui extends javax.swing.JFrame {
                             .addComponent(fileOption)
                             .addGap(18, 18, 18)
                             .addComponent(openFileButton))
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel1)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(output, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)))
                     .addContainerGap(43, Short.MAX_VALUE))
             );
             layout.setVerticalGroup(
@@ -105,7 +111,9 @@ public class Gui extends javax.swing.JFrame {
                         .addComponent(textOption)
                         .addComponent(fileOption)
                         .addComponent(openFileButton))
-                    .addContainerGap(31, Short.MAX_VALUE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(output, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
 
             pack();
@@ -131,6 +139,7 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JButton openFileButton;
+    private javax.swing.JTextField output;
     private javax.swing.JCheckBox textOption;
     // End of variables declaration//GEN-END:variables
 }
