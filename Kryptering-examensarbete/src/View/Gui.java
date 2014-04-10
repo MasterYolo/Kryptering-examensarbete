@@ -47,12 +47,17 @@ public class Gui extends javax.swing.JFrame {
 
             jButton2.setText("Decrypt");
 
-            jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "AES", "RSA" }));
+            jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "AES-128", "AES-192", "AES-256", "RSA" }));
 
             textOption.setSelected(true);
             textOption.setText("Text");
 
             fileOption.setText("File");
+            fileOption.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    fileOptionActionPerformed(evt);
+                }
+            });
 
             openFileButton.setText("Open file..");
             openFileButton.addActionListener(new java.awt.event.ActionListener() {
@@ -128,6 +133,10 @@ public class Gui extends javax.swing.JFrame {
       
    
     }//GEN-LAST:event_openFileButtonActionPerformed
+
+    private void fileOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileOptionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fileOptionActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFileChooser fileChooser;
