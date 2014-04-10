@@ -8,8 +8,13 @@ package model;
 
 /**
  *
- * @author Mikey
+ * @author Fredrik
  */
-public class RSAclass {
-    
+public class RSAclass
+{
+  //primtal
+  long p,q;
+  //produkten av primtalen
+  long n;
+  
 }
