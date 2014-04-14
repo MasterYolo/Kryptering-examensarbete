@@ -10,6 +10,8 @@ import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.RSAclass;
 import static model.RSAclass.PRIVATE_KEY_FILE;
 import static model.RSAclass.PUBLIC_KEY_FILE;
@@ -18,6 +20,8 @@ import static model.RSAclass.decrypt;
 import static model.RSAclass.encrypt;
 import static model.RSAclass.generateKey;
 
+import model.AESclass;
+
 /**
  *
  * @author Mikey
@@ -25,6 +29,7 @@ import static model.RSAclass.generateKey;
 public class Controller 
 {
     RSAclass rsa;
+    private AESclass aes = new AESclass();
     public void EncryptRSA()
     {
 
@@ -76,5 +81,27 @@ public class Controller
     }
   }
     
+    public String encryptAES(String plainText)
+    {
+        
+        String encrypt = "";
+        try {
+            encrypt = aes.encrypt(plainText);
+        } catch (Exception ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return encrypt;
+    }
+    
+    public String decryptAES(String encryptedText)
+    {
+        String decrypt = "";
+        try {
+            decrypt = aes.decrypt(encryptedText);
+        } catch (Exception ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return decrypt;
+    }
 }
 
