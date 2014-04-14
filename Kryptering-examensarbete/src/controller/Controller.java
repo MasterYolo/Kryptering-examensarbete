@@ -25,7 +25,7 @@ import static model.RSAclass.generateKey;
 public class Controller 
 {
     RSAclass rsa;
-    public void EncryptText()
+    public void EncryptRSA()
     {
 
     try {
@@ -49,7 +49,7 @@ public class Controller
       e.printStackTrace();
     }
   }
-    public void decryptText()
+    public void decryptRSA()
     {
          
 
