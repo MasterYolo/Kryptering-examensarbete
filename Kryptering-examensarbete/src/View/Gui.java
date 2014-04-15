@@ -37,7 +37,7 @@ public class Gui extends javax.swing.JFrame {
         textOption = new javax.swing.JCheckBox();
         fileOption = new javax.swing.JCheckBox();
         openFileButton = new javax.swing.JButton();
-        jProgressBar1 = new javax.swing.JProgressBar();
+        Progressbar = new javax.swing.JProgressBar();
         jLabel1 = new javax.swing.JLabel();
         output = new javax.swing.JTextField();
 
@@ -110,7 +110,7 @@ public class Gui extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel1)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Progressbar, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(output, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(input, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)))
@@ -121,7 +121,7 @@ public class Gui extends javax.swing.JFrame {
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addGap(14, 14, 14)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Progressbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel1))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -171,11 +171,13 @@ public class Gui extends javax.swing.JFrame {
 
     private void EncryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EncryptActionPerformed
         Object selected = CryptoMethod.getSelectedItem();
+        Progressbar.setValue(Progressbar.getMaximum());
         if (selected.toString().equals("AES")) {
             output.setText(controller.encryptAES(input.getText()));
         } else if (selected.toString().equals("RSA")) {
             //Fridrisch!
         }
+        
     }//GEN-LAST:event_EncryptActionPerformed
 
     private void DecryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DecryptActionPerformed
@@ -192,11 +194,11 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JComboBox CryptoMethod;
     private javax.swing.JButton Decrypt;
     private javax.swing.JButton Encrypt;
+    private javax.swing.JProgressBar Progressbar;
     private javax.swing.JFileChooser fileChooser;
     private javax.swing.JCheckBox fileOption;
     private javax.swing.JTextField input;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JButton openFileButton;
     private javax.swing.JTextField output;
     private javax.swing.JCheckBox textOption;
