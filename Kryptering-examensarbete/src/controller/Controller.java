@@ -29,7 +29,9 @@ import model.AESclass;
 public class Controller 
 {
     RSAclass rsa;
+    
     private AESclass aes = new AESclass();
+    
     public void EncryptRSA()
     {
 

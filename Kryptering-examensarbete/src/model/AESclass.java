@@ -29,9 +29,6 @@ public class AESclass {
     private static SecretKeySpec secretKey;
     private static byte[] key;
 
-    private static String decryptedString;
-    private static String encryptedString;
-
     // Performs Encryption
     public String encrypt(String plainText) throws Exception {
         Key key = generateKey();
