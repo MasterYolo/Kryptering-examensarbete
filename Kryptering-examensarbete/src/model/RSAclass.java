@@ -44,7 +44,7 @@ public class RSAclass {
    * @throws IOException
    * @throws FileNotFoundException
    */
-  public static void generateKey() {
+  public void generateKey() {
     try {
       final KeyPairGenerator keyGen = KeyPairGenerator.getInstance(ALGORITHM);
       keyGen.initialize(1024);

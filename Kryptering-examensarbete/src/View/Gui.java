@@ -9,6 +9,7 @@ import controller.Controller;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import model.RSAclass;
 
 /**
  *
@@ -20,10 +21,11 @@ public class Gui extends javax.swing.JFrame {
      * Creates new form Gui
      */
     private Controller controller;
-
+   
     public Gui() {
         initComponents();
         controller = new Controller();
+        
     }
 
     @SuppressWarnings("unchecked")

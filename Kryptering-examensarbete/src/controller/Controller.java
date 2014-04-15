@@ -18,7 +18,7 @@ import static model.RSAclass.PUBLIC_KEY_FILE;
 import static model.RSAclass.areKeysPresent;
 import static model.RSAclass.decrypt;
 import static model.RSAclass.encrypt;
-import static model.RSAclass.generateKey;
+
 
 import model.AESclass;
 
@@ -28,7 +28,9 @@ import model.AESclass;
  */
 public class Controller 
 {
-    RSAclass rsa;
+   RSAclass rsa;
+ 
+    
     
     private AESclass aes = new AESclass();
     
@@ -41,7 +43,7 @@ public class Controller
       if (!areKeysPresent()) {
         // Method generates a pair of keys using the RSA algorithm and stores it
         // in their respective files
-        generateKey();
+        //generateKey();
       }
       
    
@@ -63,12 +65,8 @@ public class Controller
        String plainText="";
     try {
 
-      // Check if the pair of keys are present else generate those..
-      if (!areKeysPresent()) {
-        // Method generates a pair of keys using the RSA algorithm and stores it
-        // in their respective files
-       generateKey();
-      }
+      
+      
 
       byte[] cipherText=text.getBytes();
       ObjectInputStream inputStream = null;
