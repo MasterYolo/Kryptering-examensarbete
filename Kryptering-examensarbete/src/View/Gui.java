@@ -183,7 +183,7 @@ public class Gui extends javax.swing.JFrame {
         // TODO add your handling code here:
         Object selected = CryptoMethod.getSelectedItem();
         if (selected.toString().equals("AES")) {
-            output.setText(controller.encryptAES(input.getText()));
+            output.setText(controller.decryptAES(input.getText()));
         } else if (selected.toString().equals("RSA")) {
             //Fridrisch!
         }
