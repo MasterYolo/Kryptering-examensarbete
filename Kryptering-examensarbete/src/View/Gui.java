@@ -176,7 +176,7 @@ public class Gui extends javax.swing.JFrame {
             if (selected.toString().equals("AES")) {
                 output.setText(controller.encryptAES(input.getText()));
             } else if (selected.toString().equals("RSA")) {
-                //Fridrisch!
+                output.setText(controller.EncryptRSA(input.getText()));
             }
             Progressbar.setValue(Progressbar.getMaximum());
         } else if (fileOption.isSelected()) {
@@ -194,7 +194,7 @@ public class Gui extends javax.swing.JFrame {
             if (selected.toString().equals("AES")) {
                 output.setText(controller.decryptAES(input.getText()));
             } else if (selected.toString().equals("RSA")) {
-                //Fridrisch!
+                output.setText(controller.decryptRSA(input.getText()));
             }
             Progressbar.setValue(Progressbar.getMaximum());
         } else if (fileOption.isSelected()) {

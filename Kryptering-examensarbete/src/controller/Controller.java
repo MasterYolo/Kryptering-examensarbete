@@ -32,9 +32,9 @@ public class Controller
     
     private AESclass aes = new AESclass();
     
-    public void EncryptRSA()
+    public String EncryptRSA(String originalText)
     {
-
+        String encrytedtext ="";
     try {
 
       // Check if the pair of keys are present else generate those.
@@ -44,43 +44,45 @@ public class Controller
         generateKey();
       }
       
-      final String originalText="";
+   
       ObjectInputStream inputStream = null;
 
       // Encrypt the string using the public key
       inputStream = new ObjectInputStream(new FileInputStream(PUBLIC_KEY_FILE));
       final PublicKey publicKey = (PublicKey) inputStream.readObject();
       final byte[] cipherText = rsa.encrypt(originalText, publicKey);
-
+      encrytedtext = cipherText.toString();
     } catch (Exception e) {
       e.printStackTrace();
     }
+    return encrytedtext;
   }
-    public void decryptRSA()
+    public String decryptRSA(String text)
     {
          
-
+       String plainText="";
     try {
 
       // Check if the pair of keys are present else generate those..
       if (!areKeysPresent()) {
         // Method generates a pair of keys using the RSA algorithm and stores it
         // in their respective files
-        generateKey();
+       generateKey();
       }
 
-      byte[] cipherText={};
+      byte[] cipherText=text.getBytes();
       ObjectInputStream inputStream = null;
 
       // Decrypt the cipher text using the private key.
       inputStream = new ObjectInputStream(new FileInputStream(PRIVATE_KEY_FILE));
       final PrivateKey privateKey = (PrivateKey) inputStream.readObject();
-      final String plainText = rsa.decrypt(cipherText, privateKey);
+      plainText = rsa.decrypt(cipherText, privateKey);
 
 
     } catch (Exception e) {
       e.printStackTrace();
     }
+    return plainText;
   }
     
     public String encryptAES(String plainText)
