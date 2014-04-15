@@ -86,7 +86,6 @@ public class Gui extends javax.swing.JFrame {
 
             jLabel1.setText("Progress:");
 
-            output.setEditable(false);
             output.setText("Output..");
 
             javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
