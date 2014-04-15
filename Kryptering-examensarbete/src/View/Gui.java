@@ -8,6 +8,7 @@ package View;
 import controller.Controller;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -171,22 +172,35 @@ public class Gui extends javax.swing.JFrame {
 
     private void EncryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EncryptActionPerformed
         Object selected = CryptoMethod.getSelectedItem();
-        Progressbar.setValue(Progressbar.getMaximum());
-        if (selected.toString().equals("AES")) {
-            output.setText(controller.encryptAES(input.getText()));
-        } else if (selected.toString().equals("RSA")) {
-            //Fridrisch!
+        if (textOption.isSelected()) {
+            if (selected.toString().equals("AES")) {
+                output.setText(controller.encryptAES(input.getText()));
+            } else if (selected.toString().equals("RSA")) {
+                //Fridrisch!
+            }
+            Progressbar.setValue(Progressbar.getMaximum());
+        } else if (fileOption.isSelected()) {
+
+        } else {
+            JOptionPane.showMessageDialog(null, "You must select either textmode or filemode", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
-        
     }//GEN-LAST:event_EncryptActionPerformed
 
     private void DecryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DecryptActionPerformed
         // TODO add your handling code here:
         Object selected = CryptoMethod.getSelectedItem();
-        if (selected.toString().equals("AES")) {
-            output.setText(controller.decryptAES(input.getText()));
-        } else if (selected.toString().equals("RSA")) {
-            //Fridrisch!
+        if (textOption.isSelected()) {
+
+            if (selected.toString().equals("AES")) {
+                output.setText(controller.decryptAES(input.getText()));
+            } else if (selected.toString().equals("RSA")) {
+                //Fridrisch!
+            }
+            Progressbar.setValue(Progressbar.getMaximum());
+        } else if (fileOption.isSelected()) {
+
+        } else {
+            JOptionPane.showMessageDialog(null, "You must select either textmode or filemode", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_DecryptActionPerformed
 
