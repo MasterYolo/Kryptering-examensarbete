@@ -173,6 +173,7 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_textOptionActionPerformed
 
     private void EncryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EncryptActionPerformed
+        Progressbar.setValue(Progressbar.getMinimum());
         Object selected = CryptoMethod.getSelectedItem();
         if (textOption.isSelected()) {
             if (selected.toString().equals("AES")) {
@@ -189,7 +190,7 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_EncryptActionPerformed
 
     private void DecryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DecryptActionPerformed
-        // TODO add your handling code here:
+        Progressbar.setValue(Progressbar.getMinimum());
         Object selected = CryptoMethod.getSelectedItem();
         if (textOption.isSelected()) {
 

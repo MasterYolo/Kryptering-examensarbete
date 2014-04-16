@@ -30,14 +30,6 @@ public class Controller {
     public String EncryptRSA(String originalText) {
         String encrytedtext = "";
         try {
-
-            // Check if the pair of keys are present else generate those.
-            if (!areKeysPresent()) {
-        // Method generates a pair of keys using the RSA algorithm and stores it
-                // in their respective files
-                //generateKey();
-            }
-
             ObjectInputStream inputStream = null;
 
             // Encrypt the string using the public key
