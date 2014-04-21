@@ -232,7 +232,7 @@ public class Gui extends javax.swing.JFrame {
                 //System.out.println(getFileName());
             } else if (selected.toString().equals("RSA")) {
                 output.setText(controller.EncryptRSA(getFileName()));
-                System.out.println(getFileName());
+                //System.out.println(getFileName());
             }
         } else {
             JOptionPane.showMessageDialog(null, "You must select either textmode or filemode", "ERROR", JOptionPane.ERROR_MESSAGE);

@@ -46,18 +46,27 @@ public class Filehandler {
 
     public String ReadFromFileAES(File inputFile, File outputFile, Cipher cipher) throws FileNotFoundException, IOException {
         String decryptedString = "";
+        FileOutputStream fos = null;
         CipherInputStream cis = null;
         FileInputStream fis = null;
         try {
             fis = new FileInputStream(inputFile);
             cis = new CipherInputStream(fis, cipher);
-            byte[] data = new byte[(int)inputFile.length()];
+            fos = new FileOutputStream(outputFile);
+            byte[] data = new byte[1024];
             int read = cis.read(data);
             while (read != -1) {
+                fos.write(data, 0, read);
                 read = cis.read(data);
                 decryptedString = new String(data, "UTF-8").trim();
             }
         } finally {
+            if (fos != null) {
+                fos.close();
+            }
+            if (fos != null) {
+                fos.close();
+            }
             if (fis != null) {
                 fis.close();
             }
@@ -73,7 +82,7 @@ public class Filehandler {
             fis = new FileInputStream(inputFile);
             fos = new FileOutputStream(outputFile);
             cos = new CipherOutputStream(fos, cipher);
-            byte[] data = new byte[(int)inputFile.length()];
+            byte[] data = new byte[512];
             int read = fis.read(data);
             while (read != -1) {
                 cos.write(data, 0, read);

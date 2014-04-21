@@ -90,7 +90,7 @@ public class Controller {
 
     public String decryptAESFromFile(String inputFileName) {
         String decrypt = "";
-        String outFileName = inputFileName + ".aes";
+        String outFileName = inputFileName + ".txt";
         try {
             Cipher cipher = aes.getDecryptedCipher();
             decrypt = filehandler.ReadFromFileAES(new File(inputFileName), new File(outFileName), cipher);
