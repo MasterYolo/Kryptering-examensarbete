@@ -177,6 +177,7 @@ public class Gui extends javax.swing.JFrame {
             textOption.setSelected(false);
             input.setEnabled(false);
             openFileButton.setEnabled(true);
+            output.setEditable(false);
         }
     }//GEN-LAST:event_fileOptionActionPerformed
 
@@ -201,15 +202,19 @@ public class Gui extends javax.swing.JFrame {
             }
             Progressbar.setValue(Progressbar.getMaximum());
         } else if (fileOption.isSelected()) {
-
-            if (selected.toString().equals("AES")) {
-                output.setText(controller.encryptAESToFile(getFileName()));
-                //System.out.println(getFileName());
-            } else if (selected.toString().equals("RSA")) {
-                output.setText(controller.EncryptRSA(getFileName()));
-                //System.out.println(getFileName());
+            if (getFileName() != null) {
+                if (selected.toString().equals("AES")) {
+                    output.setText(controller.encryptAESToFile(getFileName()));
+                    //System.out.println(getFileName());
+                } else if (selected.toString().equals("RSA")) {
+                    output.setText(controller.EncryptRSA(getFileName()));
+                    //System.out.println(getFileName());
+                }
+                Progressbar.setValue(Progressbar.getMaximum());
+            } else {
+                JOptionPane.showMessageDialog(null, "You must select a file!", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
-            Progressbar.setValue(Progressbar.getMaximum());
+
         } else {
             JOptionPane.showMessageDialog(null, "You must select either textmode or filemode", "ERROR", JOptionPane.ERROR_MESSAGE);
         }

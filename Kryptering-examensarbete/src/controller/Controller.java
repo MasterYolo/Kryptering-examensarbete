@@ -98,7 +98,7 @@ public class Controller {
         } catch (Exception ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return decrypt;
+        return "File : " + inputFileName + " are successfully decrypted and saved into : " + outFileName;
     }
 
     public String decryptAES(String encryptedText) {
