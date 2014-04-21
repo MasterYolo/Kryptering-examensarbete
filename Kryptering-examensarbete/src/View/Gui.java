@@ -29,8 +29,7 @@ public class Gui extends javax.swing.JFrame {
      * Creates new form Gui
      */
     private Controller controller;
-    public Filehandler filehandler;
-    public String file;
+    private String fileName;
     public Gui() {
         initComponents();
         controller = new Controller();
@@ -153,17 +152,20 @@ public class Gui extends javax.swing.JFrame {
             pack();
         }// </editor-fold>//GEN-END:initComponents
 
+    public String getFileName() {
+        return fileName;
+    }
+    
+    public void setFileName(String fileName) {
+        this.fileName = fileName; 
+    }
+    
     private void openFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openFileButtonActionPerformed
         
         int r = fileChooser.showOpenDialog(new JFrame());
         if (r == JFileChooser.APPROVE_OPTION) {
-            String name = fileChooser.getSelectedFile().getAbsolutePath();
-            System.out.println(name);
-            try {
-                file=filehandler.readFile(name);
-            } catch (IOException ex) {
-                Logger.getLogger(Gui.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            setFileName(fileChooser.getSelectedFile().getAbsolutePath());
+            //System.out.println(filename);
           
         }
 
@@ -201,7 +203,8 @@ public class Gui extends javax.swing.JFrame {
         } else if (fileOption.isSelected()) {
             if (selected.toString().equals("RSA"))
              {
-                 output.setText(controller.EncryptRSA(file));
+                 output.setText(controller.EncryptRSA(getFileName()));
+                 System.out.println(getFileName());
              }
         } else {
             JOptionPane.showMessageDialog(null, "You must select either textmode or filemode", "ERROR", JOptionPane.ERROR_MESSAGE);
