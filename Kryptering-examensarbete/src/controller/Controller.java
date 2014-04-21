@@ -28,6 +28,7 @@ public class Controller {
 
     private RSAclass rsas = new RSAclass();
     private AESclass aes = new AESclass();
+    
 
     private Filehandler filehandler = new Filehandler();
 
@@ -40,6 +41,22 @@ public class Controller {
             inputStream = new ObjectInputStream(new FileInputStream(PUBLIC_KEY_FILE));
             final PublicKey publicKey = (PublicKey) inputStream.readObject();
             encrytedtext = rsas.encrypt(originalText, publicKey);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return encrytedtext;
+    }
+    public String EncryptRSAFromFile(String FileName)
+    {
+        
+        String encrytedtext = "";
+        try {
+            ObjectInputStream inputStream = null;
+
+            // Encrypt the string using the public key
+            inputStream = new ObjectInputStream(new FileInputStream(PUBLIC_KEY_FILE));
+            final PublicKey publicKey = (PublicKey) inputStream.readObject();
+            encrytedtext = rsas.encrypt(filehandler.readFile(FileName), publicKey);
         } catch (Exception e) {
             e.printStackTrace();
         }

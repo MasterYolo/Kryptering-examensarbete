@@ -207,7 +207,7 @@ public class Gui extends javax.swing.JFrame {
                     output.setText(controller.encryptAESToFile(getFileName()));
                     //System.out.println(getFileName());
                 } else if (selected.toString().equals("RSA")) {
-                    output.setText(controller.EncryptRSA(getFileName()));
+                    output.setText(controller.EncryptRSAFromFile(getFileName()));
                     //System.out.println(getFileName());
                 }
                 Progressbar.setValue(Progressbar.getMaximum());
