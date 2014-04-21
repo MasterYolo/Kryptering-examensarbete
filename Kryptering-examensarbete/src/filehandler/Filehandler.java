@@ -6,11 +6,18 @@
 package filehandler;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import javax.crypto.Cipher;
+import javax.crypto.CipherInputStream;
+import javax.crypto.CipherOutputStream;
 
 /**
  *
@@ -19,21 +26,71 @@ import java.nio.file.Paths;
 public class Filehandler {
 
     /*public String readFile(String path, Charset encoding)
-            throws IOException {
-        byte[] encoded = Files.readAllBytes(Paths.get(path));
-        return new String(encoded, encoding);
-    }*/
-    public String readFile( String file ) throws IOException {
-    BufferedReader reader = new BufferedReader( new FileReader (file));
-    String         line = null;
-    StringBuilder  stringBuilder = new StringBuilder();
-    String         ls = System.getProperty("line.separator");
+     throws IOException {
+     byte[] encoded = Files.readAllBytes(Paths.get(path));
+     return new String(encoded, encoding);
+     }*/
+    public String readFile(String file) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        String line = null;
+        StringBuilder stringBuilder = new StringBuilder();
+        String ls = System.getProperty("line.separator");
 
-    while( ( line = reader.readLine() ) != null ) {
-        stringBuilder.append( line );
-        stringBuilder.append( ls );
+        while ((line = reader.readLine()) != null) {
+            stringBuilder.append(line);
+            stringBuilder.append(ls);
+        }
+
+        return stringBuilder.toString();
     }
 
-    return stringBuilder.toString();
-}
+    public String ReadFromFileAES(File inputFile, File outputFile, Cipher cipher) throws FileNotFoundException, IOException {
+        String decryptedString = "";
+        CipherInputStream cis = null;
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(inputFile);
+            cis = new CipherInputStream(fis, cipher);
+            byte[] data = new byte[(int)inputFile.length()];
+            int read = cis.read(data);
+            while (read != -1) {
+                read = cis.read(data);
+                decryptedString = new String(data, "UTF-8").trim();
+            }
+        } finally {
+            if (fis != null) {
+                fis.close();
+            }
+        }
+        return decryptedString;
+    }
+
+    public void WriteToFileAES(File inputFile, File outputFile, Cipher cipher) throws FileNotFoundException, IOException {
+        FileOutputStream fos = null;
+        CipherOutputStream cos = null;
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(inputFile);
+            fos = new FileOutputStream(outputFile);
+            cos = new CipherOutputStream(fos, cipher);
+            byte[] data = new byte[(int)inputFile.length()];
+            int read = fis.read(data);
+            while (read != -1) {
+                cos.write(data, 0, read);
+                read = fis.read(data);
+                System.out.println(new String(data, "UTF-8").trim());
+            }
+            cos.flush();
+        } finally {
+            if (cos != null) {
+                cos.close();
+            }
+            if (fos != null) {
+                fos.close();
+            }
+            if (fis != null) {
+                fis.close();
+            }
+        }
+    }
 }

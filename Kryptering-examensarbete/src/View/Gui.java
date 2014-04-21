@@ -30,10 +30,11 @@ public class Gui extends javax.swing.JFrame {
      */
     private Controller controller;
     private String fileName;
+
     public Gui() {
         initComponents();
         controller = new Controller();
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -155,18 +156,16 @@ public class Gui extends javax.swing.JFrame {
     public String getFileName() {
         return fileName;
     }
-    
+
     public void setFileName(String fileName) {
-        this.fileName = fileName; 
+        this.fileName = fileName;
     }
-    
+
     private void openFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openFileButtonActionPerformed
-        
+
         int r = fileChooser.showOpenDialog(new JFrame());
         if (r == JFileChooser.APPROVE_OPTION) {
             setFileName(fileChooser.getSelectedFile().getAbsolutePath());
-            //System.out.println(filename);
-          
         }
 
 
@@ -194,6 +193,7 @@ public class Gui extends javax.swing.JFrame {
         Progressbar.setValue(Progressbar.getMinimum());
         Object selected = CryptoMethod.getSelectedItem();
         if (textOption.isSelected()) {
+
             if (selected.toString().equals("AES")) {
                 output.setText(controller.encryptAES(input.getText()));
             } else if (selected.toString().equals("RSA")) {
@@ -201,11 +201,14 @@ public class Gui extends javax.swing.JFrame {
             }
             Progressbar.setValue(Progressbar.getMaximum());
         } else if (fileOption.isSelected()) {
-            if (selected.toString().equals("RSA"))
-             {
-                 output.setText(controller.EncryptRSA(getFileName()));
-                 System.out.println(getFileName());
-             }
+
+            if (selected.toString().equals("AES")) {
+                output.setText(controller.encryptAESToFile(getFileName()));
+                //System.out.println(getFileName());
+            } else if (selected.toString().equals("RSA")) {
+                output.setText(controller.EncryptRSA(getFileName()));
+                System.out.println(getFileName());
+            }
         } else {
             JOptionPane.showMessageDialog(null, "You must select either textmode or filemode", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
@@ -222,12 +225,15 @@ public class Gui extends javax.swing.JFrame {
                 output.setText(controller.decryptRSA(input.getText()));
             }
             Progressbar.setValue(Progressbar.getMaximum());
-        } else if (fileOption.isSelected())
-        {
-             if (selected.toString().equals("RSA"))
-             {
-                 
-             }
+        } else if (fileOption.isSelected()) {
+
+            if (selected.toString().equals("AES")) {
+                output.setText(controller.decryptAESFromFile(getFileName()));
+                //System.out.println(getFileName());
+            } else if (selected.toString().equals("RSA")) {
+                output.setText(controller.EncryptRSA(getFileName()));
+                System.out.println(getFileName());
+            }
         } else {
             JOptionPane.showMessageDialog(null, "You must select either textmode or filemode", "ERROR", JOptionPane.ERROR_MESSAGE);
         }

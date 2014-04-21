@@ -8,6 +8,7 @@ import org.apache.commons.codec.binary.Hex;
 import java.security.Key;
 
 import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 import sun.misc.*;
@@ -34,6 +35,13 @@ public class AESclass {
         return encryptedValue;
     }
 
+    public Cipher getEncryptedCipher() throws Exception {
+        Key key = generateKey();
+        Cipher cipher = Cipher.getInstance(algorithm);
+        cipher.init(Cipher.ENCRYPT_MODE, key);
+        return cipher;
+    }
+
     // Performs decryption
     public String decrypt(String encryptedText) throws Exception {
         // generate key 
@@ -44,6 +52,13 @@ public class AESclass {
         byte[] decValue = chiper.doFinal(decordedValue);
         String decryptedValue = new String(decValue);
         return decryptedValue;
+    }
+
+    public Cipher getDecryptedCipher() throws Exception {
+        Key key = generateKey();
+        Cipher cipher = Cipher.getInstance(algorithm);
+        cipher.init(Cipher.DECRYPT_MODE, key);
+        return cipher;
     }
 
     //generateKey() is used to generate a secret key for AES algorithm
