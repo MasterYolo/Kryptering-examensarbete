@@ -87,7 +87,7 @@ public class Filehandler {
             while (read != -1) {
                 cos.write(data, 0, read);
                 read = fis.read(data);
-                System.out.println(new String(data, "UTF-8").trim());
+                //System.out.println(new String(data, "UTF-8").trim());
             }
             cos.flush();
         } finally {
