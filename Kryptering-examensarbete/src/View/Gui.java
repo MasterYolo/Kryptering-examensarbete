@@ -6,6 +6,14 @@
 package View;
 
 import controller.Controller;
+import filehandler.Filehandler;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -21,7 +29,8 @@ public class Gui extends javax.swing.JFrame {
      * Creates new form Gui
      */
     private Controller controller;
-   
+    public Filehandler filehandler;
+    public String file;
     public Gui() {
         initComponents();
         controller = new Controller();
@@ -145,10 +154,17 @@ public class Gui extends javax.swing.JFrame {
         }// </editor-fold>//GEN-END:initComponents
 
     private void openFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openFileButtonActionPerformed
-
+        
         int r = fileChooser.showOpenDialog(new JFrame());
         if (r == JFileChooser.APPROVE_OPTION) {
-            String name = fileChooser.getSelectedFile().getName();
+            String name = fileChooser.getSelectedFile().getAbsolutePath();
+            System.out.println(name);
+            try {
+                file=filehandler.readFile(name);
+            } catch (IOException ex) {
+                Logger.getLogger(Gui.class.getName()).log(Level.SEVERE, null, ex);
+            }
+          
         }
 
 
@@ -183,7 +199,10 @@ public class Gui extends javax.swing.JFrame {
             }
             Progressbar.setValue(Progressbar.getMaximum());
         } else if (fileOption.isSelected()) {
-
+            if (selected.toString().equals("RSA"))
+             {
+                 output.setText(controller.EncryptRSA(file));
+             }
         } else {
             JOptionPane.showMessageDialog(null, "You must select either textmode or filemode", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
@@ -200,8 +219,12 @@ public class Gui extends javax.swing.JFrame {
                 output.setText(controller.decryptRSA(input.getText()));
             }
             Progressbar.setValue(Progressbar.getMaximum());
-        } else if (fileOption.isSelected()) {
-
+        } else if (fileOption.isSelected())
+        {
+             if (selected.toString().equals("RSA"))
+             {
+                 
+             }
         } else {
             JOptionPane.showMessageDialog(null, "You must select either textmode or filemode", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
