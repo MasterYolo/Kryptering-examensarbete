@@ -207,18 +207,19 @@ public class Gui extends javax.swing.JFrame {
                 //System.out.println(getFileName());
             } else if (selected.toString().equals("RSA")) {
                 output.setText(controller.EncryptRSA(getFileName()));
-                System.out.println(getFileName());
+                //System.out.println(getFileName());
             }
+            Progressbar.setValue(Progressbar.getMaximum());
         } else {
             JOptionPane.showMessageDialog(null, "You must select either textmode or filemode", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_EncryptActionPerformed
 
     private void DecryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DecryptActionPerformed
-        Progressbar.setValue(Progressbar.getMinimum());
+
         Object selected = CryptoMethod.getSelectedItem();
         if (textOption.isSelected()) {
-
+            Progressbar.setValue(Progressbar.getMinimum());
             if (selected.toString().equals("AES")) {
                 output.setText(controller.decryptAES(input.getText()));
             } else if (selected.toString().equals("RSA")) {
@@ -226,14 +227,16 @@ public class Gui extends javax.swing.JFrame {
             }
             Progressbar.setValue(Progressbar.getMaximum());
         } else if (fileOption.isSelected()) {
-
+            Progressbar.setValue(Progressbar.getMinimum());
             if (selected.toString().equals("AES")) {
                 output.setText(controller.decryptAESFromFile(getFileName()));
+
                 //System.out.println(getFileName());
             } else if (selected.toString().equals("RSA")) {
                 output.setText(controller.EncryptRSA(getFileName()));
                 //System.out.println(getFileName());
             }
+            Progressbar.setValue(Progressbar.getMaximum());
         } else {
             JOptionPane.showMessageDialog(null, "You must select either textmode or filemode", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
