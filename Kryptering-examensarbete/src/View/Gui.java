@@ -100,7 +100,7 @@ public class Gui extends javax.swing.JFrame {
             jLabel1.setText("Progress:");
 
             timerField.setEditable(false);
-            timerField.setText("Output..");
+            timerField.setText("Time flies..");
 
             javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
             getContentPane().setLayout(layout);
