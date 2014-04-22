@@ -52,6 +52,7 @@ public class Gui extends javax.swing.JFrame {
         Progressbar = new javax.swing.JProgressBar();
         jLabel1 = new javax.swing.JLabel();
         output = new javax.swing.JTextField();
+        textArea1 = new java.awt.TextArea();
 
         fileChooser.setCurrentDirectory(new java.io.File("C:\\"));
 
@@ -106,7 +107,7 @@ public class Gui extends javax.swing.JFrame {
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(27, 27, 27)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(Encrypt)
                             .addGap(18, 18, 18)
@@ -123,9 +124,9 @@ public class Gui extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(Progressbar, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(output, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(input, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)))
+                        .addComponent(output)
+                        .addComponent(input, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
+                        .addComponent(textArea1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addContainerGap(47, Short.MAX_VALUE))
             );
             layout.setVerticalGroup(
@@ -147,7 +148,9 @@ public class Gui extends javax.swing.JFrame {
                         .addComponent(openFileButton))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(output, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(textArea1, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                    .addContainerGap())
             );
 
             pack();
@@ -198,7 +201,8 @@ public class Gui extends javax.swing.JFrame {
             if (selected.toString().equals("AES")) {
                 output.setText(controller.encryptAES(input.getText()));
             } else if (selected.toString().equals("RSA")) {
-                output.setText(controller.EncryptRSA(input.getText()));
+                textArea1.setText(controller.EncryptRSA(input.getText()));
+                output.setText(controller.getTime());
             }
             Progressbar.setValue(Progressbar.getMaximum());
         } else if (fileOption.isSelected()) {
@@ -207,7 +211,8 @@ public class Gui extends javax.swing.JFrame {
                     output.setText(controller.encryptAESToFile(getFileName()));
                     //System.out.println(getFileName());
                 } else if (selected.toString().equals("RSA")) {
-                    output.setText(controller.EncryptRSAFromFile(getFileName()));
+                    textArea1.setText(controller.EncryptRSAFromFile(getFileName()));
+                     output.setText(controller.getTime());
                     //System.out.println(getFileName());
                 }
                 Progressbar.setValue(Progressbar.getMaximum());
@@ -228,7 +233,7 @@ public class Gui extends javax.swing.JFrame {
             if (selected.toString().equals("AES")) {
                 output.setText(controller.decryptAES(input.getText()));
             } else if (selected.toString().equals("RSA")) {
-                output.setText(controller.decryptRSA(input.getText()));
+                textArea1.setText(controller.decryptRSA(input.getText()));
             }
             Progressbar.setValue(Progressbar.getMaximum());
         } else if (fileOption.isSelected()) {
@@ -238,7 +243,7 @@ public class Gui extends javax.swing.JFrame {
 
                 //System.out.println(getFileName());
             } else if (selected.toString().equals("RSA")) {
-                output.setText(controller.EncryptRSA(getFileName()));
+                textArea1.setText(controller.decryptRSAFromFile(getFileName()));
                 //System.out.println(getFileName());
             }
             Progressbar.setValue(Progressbar.getMaximum());
@@ -258,6 +263,7 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton openFileButton;
     private javax.swing.JTextField output;
+    private java.awt.TextArea textArea1;
     private javax.swing.JCheckBox textOption;
     // End of variables declaration//GEN-END:variables
 }

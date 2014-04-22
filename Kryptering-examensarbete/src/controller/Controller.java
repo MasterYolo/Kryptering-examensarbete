@@ -28,11 +28,17 @@ public class Controller {
 
     private RSAclass rsas = new RSAclass();
     private AESclass aes = new AESclass();
+    public long starttime,endtime,time;
     
-
+    public String getTime()
+    {
+        String s = String.valueOf(time);
+        return "Time To Encrypt: "+s+" Milliseconds";
+    }
     private Filehandler filehandler = new Filehandler();
 
     public String EncryptRSA(String originalText) {
+         starttime = System.currentTimeMillis();
         String encrytedtext = "";
         try {
             ObjectInputStream inputStream = null;
@@ -44,11 +50,14 @@ public class Controller {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        endtime = System.currentTimeMillis();
+        time = (endtime-starttime);
+        
         return encrytedtext;
     }
     public String EncryptRSAFromFile(String FileName)
     {
-        
+         starttime = System.currentTimeMillis();
         String encrytedtext = "";
         try {
             ObjectInputStream inputStream = null;
@@ -60,6 +69,8 @@ public class Controller {
         } catch (Exception e) {
             e.printStackTrace();
         }
+         endtime = System.currentTimeMillis();
+        time = (endtime-starttime);
         return encrytedtext;
     }
 
@@ -73,6 +84,22 @@ public class Controller {
             inputStream = new ObjectInputStream(new FileInputStream(PRIVATE_KEY_FILE));
             final PrivateKey privateKey = (PrivateKey) inputStream.readObject();
             plainText = rsas.decrypt(text, privateKey);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return plainText;
+    }
+     public String decryptRSAFromFile(String text) {
+
+        String plainText = "";
+        try {
+            ObjectInputStream inputStream = null;
+
+            // Decrypt the cipher text using the private key.
+            inputStream = new ObjectInputStream(new FileInputStream(PRIVATE_KEY_FILE));
+            final PrivateKey privateKey = (PrivateKey) inputStream.readObject();
+            plainText = rsas.decrypt(filehandler.readFile(text), privateKey);
 
         } catch (Exception e) {
             e.printStackTrace();
