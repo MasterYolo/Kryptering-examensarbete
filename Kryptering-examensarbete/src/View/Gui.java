@@ -51,8 +51,8 @@ public class Gui extends javax.swing.JFrame {
         openFileButton = new javax.swing.JButton();
         Progressbar = new javax.swing.JProgressBar();
         jLabel1 = new javax.swing.JLabel();
-        output = new javax.swing.JTextField();
-        textArea1 = new java.awt.TextArea();
+        timerField = new javax.swing.JTextField();
+        eventOutput = new java.awt.TextArea();
 
         fileChooser.setCurrentDirectory(new java.io.File("C:\\"));
 
@@ -99,7 +99,8 @@ public class Gui extends javax.swing.JFrame {
 
             jLabel1.setText("Progress:");
 
-            output.setText("Output..");
+            timerField.setEditable(false);
+            timerField.setText("Output..");
 
             javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
             getContentPane().setLayout(layout);
@@ -124,9 +125,9 @@ public class Gui extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(Progressbar, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(output)
+                        .addComponent(timerField)
                         .addComponent(input, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
-                        .addComponent(textArea1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(eventOutput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addContainerGap(47, Short.MAX_VALUE))
             );
             layout.setVerticalGroup(
@@ -147,9 +148,9 @@ public class Gui extends javax.swing.JFrame {
                         .addComponent(fileOption)
                         .addComponent(openFileButton))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(output, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(timerField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(textArea1, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                    .addComponent(eventOutput, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
                     .addContainerGap())
             );
 
@@ -180,7 +181,7 @@ public class Gui extends javax.swing.JFrame {
             textOption.setSelected(false);
             input.setEnabled(false);
             openFileButton.setEnabled(true);
-            output.setEditable(false);
+            timerField.setEditable(false);
         }
     }//GEN-LAST:event_fileOptionActionPerformed
 
@@ -199,20 +200,22 @@ public class Gui extends javax.swing.JFrame {
         if (textOption.isSelected()) {
 
             if (selected.toString().equals("AES")) {
-                output.setText(controller.encryptAES(input.getText()));
+                eventOutput.setText(controller.encryptAES(input.getText()));
+                timerField.setText(controller.getTime());
             } else if (selected.toString().equals("RSA")) {
-                textArea1.setText(controller.EncryptRSA(input.getText()));
-                output.setText(controller.getTime());
+                eventOutput.setText(controller.EncryptRSA(input.getText()));
+                timerField.setText(controller.getTime());
             }
             Progressbar.setValue(Progressbar.getMaximum());
         } else if (fileOption.isSelected()) {
             if (getFileName() != null) {
                 if (selected.toString().equals("AES")) {
-                    output.setText(controller.encryptAESToFile(getFileName()));
+                    eventOutput.setText(controller.encryptAESToFile(getFileName()));
+                    timerField.setText(controller.getTime());
                     //System.out.println(getFileName());
                 } else if (selected.toString().equals("RSA")) {
-                    textArea1.setText(controller.EncryptRSAFromFile(getFileName()));
-                     output.setText(controller.getTime());
+                    eventOutput.setText(controller.EncryptRSAFromFile(getFileName()));
+                    timerField.setText(controller.getTime());
                     //System.out.println(getFileName());
                 }
                 Progressbar.setValue(Progressbar.getMaximum());
@@ -231,19 +234,20 @@ public class Gui extends javax.swing.JFrame {
         if (textOption.isSelected()) {
             Progressbar.setValue(Progressbar.getMinimum());
             if (selected.toString().equals("AES")) {
-                output.setText(controller.decryptAES(input.getText()));
+                eventOutput.setText(controller.decryptAES(input.getText()));
+                timerField.setText(controller.getTime());
             } else if (selected.toString().equals("RSA")) {
-                textArea1.setText(controller.decryptRSA(input.getText()));
+                eventOutput.setText(controller.decryptRSA(input.getText()));
             }
             Progressbar.setValue(Progressbar.getMaximum());
         } else if (fileOption.isSelected()) {
             Progressbar.setValue(Progressbar.getMinimum());
             if (selected.toString().equals("AES")) {
-                output.setText(controller.decryptAESFromFile(getFileName()));
-
+                eventOutput.setText(controller.decryptAESFromFile(getFileName()));
+                timerField.setText(controller.getTime());
                 //System.out.println(getFileName());
             } else if (selected.toString().equals("RSA")) {
-                textArea1.setText(controller.decryptRSAFromFile(getFileName()));
+                eventOutput.setText(controller.decryptRSAFromFile(getFileName()));
                 //System.out.println(getFileName());
             }
             Progressbar.setValue(Progressbar.getMaximum());
@@ -257,13 +261,13 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JButton Decrypt;
     private javax.swing.JButton Encrypt;
     private javax.swing.JProgressBar Progressbar;
+    private java.awt.TextArea eventOutput;
     private javax.swing.JFileChooser fileChooser;
     private javax.swing.JCheckBox fileOption;
     private javax.swing.JTextField input;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton openFileButton;
-    private javax.swing.JTextField output;
-    private java.awt.TextArea textArea1;
     private javax.swing.JCheckBox textOption;
+    private javax.swing.JTextField timerField;
     // End of variables declaration//GEN-END:variables
 }

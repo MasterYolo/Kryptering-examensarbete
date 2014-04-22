@@ -28,17 +28,16 @@ public class Controller {
 
     private RSAclass rsas = new RSAclass();
     private AESclass aes = new AESclass();
-    public long starttime,endtime,time;
-    
-    public String getTime()
-    {
-        String s = String.valueOf(time);
-        return "Time To Encrypt: "+s+" Milliseconds";
-    }
+    public long starttime, endtime, time;
     private Filehandler filehandler = new Filehandler();
 
+    public String getTime() {
+        String s = String.valueOf(time);
+        return "Time To Encrypt: " + s + " Milliseconds";
+    }
+
     public String EncryptRSA(String originalText) {
-         starttime = System.currentTimeMillis();
+        starttime = System.currentTimeMillis();
         String encrytedtext = "";
         try {
             ObjectInputStream inputStream = null;
@@ -51,13 +50,13 @@ public class Controller {
             e.printStackTrace();
         }
         endtime = System.currentTimeMillis();
-        time = (endtime-starttime);
-        
+        time = (endtime - starttime);
+
         return encrytedtext;
     }
-    public String EncryptRSAFromFile(String FileName)
-    {
-         starttime = System.currentTimeMillis();
+
+    public String EncryptRSAFromFile(String FileName) {
+        starttime = System.currentTimeMillis();
         String encrytedtext = "";
         try {
             ObjectInputStream inputStream = null;
@@ -69,8 +68,8 @@ public class Controller {
         } catch (Exception e) {
             e.printStackTrace();
         }
-         endtime = System.currentTimeMillis();
-        time = (endtime-starttime);
+        endtime = System.currentTimeMillis();
+        time = (endtime - starttime);
         return encrytedtext;
     }
 
@@ -90,7 +89,8 @@ public class Controller {
         }
         return plainText;
     }
-     public String decryptRSAFromFile(String text) {
+
+    public String decryptRSAFromFile(String text) {
 
         String plainText = "";
         try {
@@ -104,22 +104,25 @@ public class Controller {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return plainText;
     }
 
     public String encryptAES(String plainText) {
-
+        starttime = System.currentTimeMillis();
         String encrypt = "";
         try {
             encrypt = aes.encrypt(plainText);
         } catch (Exception ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
+        endtime = System.currentTimeMillis();
+        time = (endtime - starttime);
         return encrypt;
     }
 
     public String encryptAESToFile(String inputFileName) {
-
+        starttime = System.currentTimeMillis();
         String outFileName = inputFileName + ".aes";
         String encrypt = "";
         try {
@@ -129,29 +132,36 @@ public class Controller {
         } catch (Exception ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
+        endtime = System.currentTimeMillis();
+        time = (endtime - starttime);
         return encrypt;
     }
 
     public String decryptAESFromFile(String inputFileName) {
+        starttime = System.currentTimeMillis();
         String decrypt = "";
         String outFileName = inputFileName + ".txt";
         try {
             Cipher cipher = aes.getDecryptedCipher();
             decrypt = filehandler.ReadFromFileAES(new File(inputFileName), new File(outFileName), cipher);
-            //decrypt = aes.decrypt(encryptedText);
         } catch (Exception ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
+        endtime = System.currentTimeMillis();
+        time = (endtime - starttime);
         return "File : " + inputFileName + " are successfully decrypted and saved into : " + outFileName;
     }
 
     public String decryptAES(String encryptedText) {
+        starttime = System.currentTimeMillis();
         String decrypt = "";
         try {
             decrypt = aes.decrypt(encryptedText);
         } catch (Exception ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
+        endtime = System.currentTimeMillis();
+        time = (endtime - starttime);
         return decrypt;
     }
 }
