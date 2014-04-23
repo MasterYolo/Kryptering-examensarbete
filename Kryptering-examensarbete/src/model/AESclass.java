@@ -19,7 +19,7 @@ import sun.misc.*;
 public class AESclass {
 
     private static String algorithm = "AES/CTR/NoPadding";
-    private static byte[] keyValue = new byte[]{'A', 'S', 'e', 'c', 'u', 'r', 'e', 'S', 'e', 'c', 'r', 'e', 't', 'K', 'e', 'y'};
+    private static byte[] keyValue = new byte[]{'A', 'S', 'e', 'c', 'u', 'r', 'e', 'S', 'e', 'c', 'r', 'e', 't', 'K', 'e', 'y',};
     /* Only using this because i want to be able to close down the program and open it again. And im not wanna implement inputoutput streams in this part */
     private byte[] ivBytes = new byte[]{0x00, 0x01, 0x02, 0x03, 0x00, 0x01, 0x02, 0x03, 0x00, 0x00, 0x00,
         0x00, 0x00, 0x00, 0x00, 0x01}; // Can be improved by using secure random. 
@@ -27,10 +27,13 @@ public class AESclass {
     private IvParameterSpec ivSpec;
     private static byte[] key;
 
+    public AESclass() {
+        ivSpec = new IvParameterSpec(ivBytes);
+    }
+    
     // Performs Encryption
     public String encrypt(String plainText) throws Exception {
         Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
-        ivSpec = new IvParameterSpec(ivBytes);
         Key key = generateKey();
         Cipher chiper = Cipher.getInstance(algorithm, "BC");
         chiper.init(Cipher.ENCRYPT_MODE, key, ivSpec);
@@ -41,7 +44,6 @@ public class AESclass {
 
     public Cipher getEncryptedCipher() throws Exception {
         Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
-        ivSpec = new IvParameterSpec(ivBytes);
         Key key = generateKey();
         Cipher cipher = Cipher.getInstance(algorithm);
         cipher.init(Cipher.ENCRYPT_MODE, key, ivSpec);
@@ -53,7 +55,6 @@ public class AESclass {
         // generate key 
         Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
         Key key = generateKey();
-        ivSpec = new IvParameterSpec(ivBytes);
         Cipher chiper = Cipher.getInstance(algorithm, "BC");
         chiper.init(Cipher.DECRYPT_MODE, key, ivSpec);
         byte[] decordedValue = new BASE64Decoder().decodeBuffer(encryptedText);

@@ -25,11 +25,9 @@ import javax.crypto.CipherOutputStream;
  */
 public class Filehandler {
 
-    /*public String readFile(String path, Charset encoding)
-     throws IOException {
-     byte[] encoded = Files.readAllBytes(Paths.get(path));
-     return new String(encoded, encoding);
-     }*/
+    public int buffersize = 512; //Change this variable to change the buffersize.
+    
+    
     public String readFile(String file) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(file));
         String line = null;
@@ -53,7 +51,7 @@ public class Filehandler {
             fis = new FileInputStream(inputFile);
             cis = new CipherInputStream(fis, cipher);
             fos = new FileOutputStream(outputFile);
-            byte[] data = new byte[1024];
+            byte[] data = new byte[buffersize];
             int read = cis.read(data);
             while (read != -1) {
                 fos.write(data, 0, read);
@@ -82,7 +80,7 @@ public class Filehandler {
             fis = new FileInputStream(inputFile);
             fos = new FileOutputStream(outputFile);
             cos = new CipherOutputStream(fos, cipher);
-            byte[] data = new byte[512];
+            byte[] data = new byte[buffersize];
             int read = fis.read(data);
             while (read != -1) {
                 cos.write(data, 0, read);
