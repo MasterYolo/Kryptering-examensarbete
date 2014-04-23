@@ -128,7 +128,7 @@ public class Controller {
         try {
             Cipher cipher = aes.getEncryptedCipher();
             filehandler.WriteToFileAES(new File(inputFileName), new File(outFileName), cipher);
-            encrypt = "File : " + outFileName + " are successfully encrypted!";
+            encrypt = "File : " + outFileName + " was successfully encrypted!";
         } catch (Exception ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }

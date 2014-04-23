@@ -49,8 +49,6 @@ public class Gui extends javax.swing.JFrame {
         textOption = new javax.swing.JCheckBox();
         fileOption = new javax.swing.JCheckBox();
         openFileButton = new javax.swing.JButton();
-        Progressbar = new javax.swing.JProgressBar();
-        jLabel1 = new javax.swing.JLabel();
         timerField = new javax.swing.JTextField();
         eventOutput = new java.awt.TextArea();
 
@@ -97,8 +95,6 @@ public class Gui extends javax.swing.JFrame {
                 }
             });
 
-            jLabel1.setText("Progress:");
-
             timerField.setEditable(false);
             timerField.setText("Time flies..");
 
@@ -111,20 +107,16 @@ public class Gui extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(Encrypt)
-                            .addGap(18, 18, 18)
+                            .addGap(14, 14, 14)
                             .addComponent(Decrypt)
                             .addGap(18, 18, 18)
                             .addComponent(CryptoMethod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
                             .addComponent(textOption)
-                            .addGap(18, 18, 18)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(fileOption)
                             .addGap(18, 18, 18)
                             .addComponent(openFileButton))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(Progressbar, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(timerField)
                         .addComponent(input, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
                         .addComponent(eventOutput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -133,24 +125,22 @@ public class Gui extends javax.swing.JFrame {
             layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(14, 14, 14)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(Progressbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGap(19, 19, 19)
                     .addComponent(input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Encrypt)
-                        .addComponent(Decrypt)
-                        .addComponent(CryptoMethod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(textOption)
-                        .addComponent(fileOption)
-                        .addComponent(openFileButton))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CryptoMethod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textOption)
+                            .addComponent(fileOption)
+                            .addComponent(openFileButton))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Encrypt)
+                            .addComponent(Decrypt)))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(timerField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(eventOutput, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                    .addComponent(eventOutput, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
                     .addContainerGap())
             );
 
@@ -195,7 +185,7 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_textOptionActionPerformed
 
     private void EncryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EncryptActionPerformed
-        Progressbar.setValue(Progressbar.getMinimum());
+    
         Object selected = CryptoMethod.getSelectedItem();
         if (textOption.isSelected()) {
 
@@ -206,7 +196,7 @@ public class Gui extends javax.swing.JFrame {
                 eventOutput.setText(controller.EncryptRSA(input.getText()));
                 timerField.setText(controller.getTime());
             }
-            Progressbar.setValue(Progressbar.getMaximum());
+        
         } else if (fileOption.isSelected()) {
             if (getFileName() != null) {
                 if (selected.toString().equals("AES")) {
@@ -218,7 +208,7 @@ public class Gui extends javax.swing.JFrame {
                     timerField.setText(controller.getTime());
                     //System.out.println(getFileName());
                 }
-                Progressbar.setValue(Progressbar.getMaximum());
+               
             } else {
                 JOptionPane.showMessageDialog(null, "You must select a file!", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
@@ -232,16 +222,16 @@ public class Gui extends javax.swing.JFrame {
 
         Object selected = CryptoMethod.getSelectedItem();
         if (textOption.isSelected()) {
-            Progressbar.setValue(Progressbar.getMinimum());
+      
             if (selected.toString().equals("AES")) {
                 eventOutput.setText(controller.decryptAES(input.getText()));
                 timerField.setText(controller.getTime());
             } else if (selected.toString().equals("RSA")) {
                 eventOutput.setText(controller.decryptRSA(input.getText()));
             }
-            Progressbar.setValue(Progressbar.getMaximum());
+       
         } else if (fileOption.isSelected()) {
-            Progressbar.setValue(Progressbar.getMinimum());
+
             if (selected.toString().equals("AES")) {
                 eventOutput.setText(controller.decryptAESFromFile(getFileName()));
                 timerField.setText(controller.getTime());
@@ -250,7 +240,7 @@ public class Gui extends javax.swing.JFrame {
                 eventOutput.setText(controller.decryptRSAFromFile(getFileName()));
                 //System.out.println(getFileName());
             }
-            Progressbar.setValue(Progressbar.getMaximum());
+       
         } else {
             JOptionPane.showMessageDialog(null, "You must select either textmode or filemode", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
@@ -260,12 +250,10 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JComboBox CryptoMethod;
     private javax.swing.JButton Decrypt;
     private javax.swing.JButton Encrypt;
-    private javax.swing.JProgressBar Progressbar;
     private java.awt.TextArea eventOutput;
     private javax.swing.JFileChooser fileChooser;
     private javax.swing.JCheckBox fileOption;
     private javax.swing.JTextField input;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton openFileButton;
     private javax.swing.JCheckBox textOption;
     private javax.swing.JTextField timerField;
