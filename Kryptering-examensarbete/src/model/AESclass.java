@@ -1,15 +1,14 @@
 package model;
 
+import java.security.Key;
 import java.security.NoSuchAlgorithmException;
+import java.security.Security;
+import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
-import org.apache.commons.codec.binary.Hex;
-
-import java.security.Key;
-
-import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import org.apache.commons.codec.binary.Hex;
 
 import sun.misc.*;
 
@@ -19,35 +18,44 @@ import sun.misc.*;
  */
 public class AESclass {
 
-    private static String algorithm = "AES";
+    private static String algorithm = "AES/CTR/NoPadding";
     private static byte[] keyValue = new byte[]{'A', 'S', 'e', 'c', 'u', 'r', 'e', 'S', 'e', 'c', 'r', 'e', 't', 'K', 'e', 'y'};
-
+    /* Only using this because i want to be able to close down the program and open it again. And im not wanna implement inputoutput streams in this part */
+    private byte[] ivBytes = new byte[]{0x00, 0x01, 0x02, 0x03, 0x00, 0x01, 0x02, 0x03, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x01}; // Can be improved by using secure random. 
     private static SecretKeySpec secretKey;
+    private IvParameterSpec ivSpec;
     private static byte[] key;
 
     // Performs Encryption
     public String encrypt(String plainText) throws Exception {
+        Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
+        ivSpec = new IvParameterSpec(ivBytes);
         Key key = generateKey();
-        Cipher chiper = Cipher.getInstance(algorithm);
-        chiper.init(Cipher.ENCRYPT_MODE, key);
+        Cipher chiper = Cipher.getInstance(algorithm, "BC");
+        chiper.init(Cipher.ENCRYPT_MODE, key, ivSpec);
         byte[] encVal = chiper.doFinal(plainText.getBytes());
         String encryptedValue = new BASE64Encoder().encode(encVal);
         return encryptedValue;
     }
 
     public Cipher getEncryptedCipher() throws Exception {
+        Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
+        ivSpec = new IvParameterSpec(ivBytes);
         Key key = generateKey();
         Cipher cipher = Cipher.getInstance(algorithm);
-        cipher.init(Cipher.ENCRYPT_MODE, key);
+        cipher.init(Cipher.ENCRYPT_MODE, key, ivSpec);
         return cipher;
     }
 
     // Performs decryption
     public String decrypt(String encryptedText) throws Exception {
         // generate key 
+        Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
         Key key = generateKey();
-        Cipher chiper = Cipher.getInstance(algorithm);
-        chiper.init(Cipher.DECRYPT_MODE, key);
+        ivSpec = new IvParameterSpec(ivBytes);
+        Cipher chiper = Cipher.getInstance(algorithm, "BC");
+        chiper.init(Cipher.DECRYPT_MODE, key, ivSpec);
         byte[] decordedValue = new BASE64Decoder().decodeBuffer(encryptedText);
         byte[] decValue = chiper.doFinal(decordedValue);
         String decryptedValue = new String(decValue);
@@ -56,8 +64,9 @@ public class AESclass {
 
     public Cipher getDecryptedCipher() throws Exception {
         Key key = generateKey();
-        Cipher cipher = Cipher.getInstance(algorithm);
-        cipher.init(Cipher.DECRYPT_MODE, key);
+        Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
+        Cipher cipher = Cipher.getInstance(algorithm, "BC");
+        cipher.init(Cipher.DECRYPT_MODE, key, ivSpec);
         return cipher;
     }
 
