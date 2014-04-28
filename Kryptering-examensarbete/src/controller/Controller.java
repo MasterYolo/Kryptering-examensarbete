@@ -37,7 +37,11 @@ public class Controller {
     }
 
     public String EncryptRSA(String originalText) {
-       
+       if (!areKeysPresent()) {
+        // Method generates a pair of keys using the RSA algorithm and stores it
+        // in their respective files
+        rsas.generateKey();
+      }
         starttime = System.currentTimeMillis();
         String encrytedtext = "";
         try {
@@ -57,6 +61,11 @@ public class Controller {
     }
 
     public String EncryptRSAFromFile(String FileName) {
+          if (!areKeysPresent()) {
+        // Method generates a pair of keys using the RSA algorithm and stores it
+        // in their respective files
+        rsas.generateKey();
+      }
         starttime = System.currentTimeMillis();
         String encryptedtext = "";
         String newfile = FileName + ".RSA";
@@ -77,6 +86,11 @@ public class Controller {
     }
 
     public String decryptRSA(String text) {
+          if (!areKeysPresent()) {
+        // Method generates a pair of keys using the RSA algorithm and stores it
+        // in their respective files
+        rsas.generateKey();
+      }
 
         String plainText = "";
         try {
@@ -94,6 +108,11 @@ public class Controller {
     }
 
     public String decryptRSAFromFile(String FileName) {
+          if (!areKeysPresent()) {
+        // Method generates a pair of keys using the RSA algorithm and stores it
+        // in their respective files
+        rsas.generateKey();
+      }
         starttime = System.currentTimeMillis();
         String plainText = "";
         String newfile = FileName + ".txt";
