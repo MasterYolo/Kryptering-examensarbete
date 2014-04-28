@@ -37,7 +37,7 @@ public class Controller {
     }
 
     public String EncryptRSA(String originalText) {
-        rsas.generateKey();
+       
         starttime = System.currentTimeMillis();
         String encrytedtext = "";
         try {
@@ -103,7 +103,7 @@ public class Controller {
             // Decrypt the cipher text using the private key.
             inputStream = new ObjectInputStream(new FileInputStream(PRIVATE_KEY_FILE));
             final PrivateKey privateKey = (PrivateKey) inputStream.readObject();
-            plainText = rsas.decrypt(filehandler.readFile(FileName), privateKey);
+            plainText = rsas.decrypt(filehandler.readFileAsString(FileName), privateKey);
             filehandler.RSAwriteToFile(newfile, plainText);
         } catch (Exception e) {
             e.printStackTrace();

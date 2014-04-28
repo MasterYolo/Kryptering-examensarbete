@@ -228,6 +228,7 @@ public class Gui extends javax.swing.JFrame {
                 timerField.setText(controller.getTime());
             } else if (selected.toString().equals("RSA")) {
                 eventOutput.setText(controller.decryptRSA(input.getText()));
+                timerField.setText(controller.getTime());
             }
        
         } else if (fileOption.isSelected()) {
@@ -238,6 +239,7 @@ public class Gui extends javax.swing.JFrame {
                 //System.out.println(getFileName());
             } else if (selected.toString().equals("RSA")) {
                 eventOutput.setText(controller.decryptRSAFromFile(getFileName()));
+                timerField.setText(controller.getTime());
                 //System.out.println(getFileName());
             }
        
