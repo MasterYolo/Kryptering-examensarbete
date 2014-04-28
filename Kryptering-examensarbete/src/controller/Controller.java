@@ -37,6 +37,7 @@ public class Controller {
     }
 
     public String EncryptRSA(String originalText) {
+        rsas.generateKey();
         starttime = System.currentTimeMillis();
         String encrytedtext = "";
         try {
@@ -57,26 +58,24 @@ public class Controller {
 
     public String EncryptRSAFromFile(String FileName) {
         starttime = System.currentTimeMillis();
-        String encryptedtext = "";
-        String newfile = FileName+".RSA";
+        String encrytedtext = "";
         try {
             ObjectInputStream inputStream = null;
 
             // Encrypt the string using the public key
             inputStream = new ObjectInputStream(new FileInputStream(PUBLIC_KEY_FILE));
             final PublicKey publicKey = (PublicKey) inputStream.readObject();
-            encryptedtext = rsas.encrypt(filehandler.readFile(FileName), publicKey);
-            filehandler.RSAwriteToFile(newfile, encryptedtext);
+            encrytedtext = rsas.encrypt(filehandler.readFile(FileName), publicKey);
         } catch (Exception e) {
             e.printStackTrace();
         }
         endtime = System.currentTimeMillis();
         time = (endtime - starttime);
-        return "File : " + FileName + " was successfully encrypted and saved into "+newfile;
+        return encrytedtext;
     }
 
     public String decryptRSA(String text) {
-        starttime = System.currentTimeMillis();
+
         String plainText = "";
         try {
             ObjectInputStream inputStream = null;
@@ -85,33 +84,29 @@ public class Controller {
             inputStream = new ObjectInputStream(new FileInputStream(PRIVATE_KEY_FILE));
             final PrivateKey privateKey = (PrivateKey) inputStream.readObject();
             plainText = rsas.decrypt(text, privateKey);
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-         endtime = System.currentTimeMillis();
-        time = (endtime - starttime);
         return plainText;
     }
 
-    public String decryptRSAFromFile(String FileName) {
-        starttime = System.currentTimeMillis();
+    public String decryptRSAFromFile(String text) {
+
         String plainText = "";
-         String newfile = FileName+".txt";
         try {
             ObjectInputStream inputStream = null;
 
             // Decrypt the cipher text using the private key.
             inputStream = new ObjectInputStream(new FileInputStream(PRIVATE_KEY_FILE));
             final PrivateKey privateKey = (PrivateKey) inputStream.readObject();
-            plainText = rsas.decrypt(filehandler.readFile(FileName), privateKey);
-            filehandler.RSAwriteToFile(newfile, plainText);
+            plainText = rsas.decrypt(filehandler.readFile(text), privateKey);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-         endtime = System.currentTimeMillis();
-        time = (endtime - starttime);
-        return "File : " + FileName + " was successfully encrypted and saved into "+newfile;
+
+        return plainText;
     }
 
     public String encryptAES(String plainText) {
@@ -130,17 +125,17 @@ public class Controller {
     public String encryptAESToFile(String inputFileName) {
         starttime = System.currentTimeMillis();
         String outFileName = inputFileName + ".aes";
-        String filedone = "";
+        String encrypt = "";
         try {
             Cipher cipher = aes.getEncryptedCipher();
             filehandler.WriteToFileAES(new File(inputFileName), new File(outFileName), cipher);
-            filedone = "File : " + outFileName + " was successfully encrypted!";
+            encrypt = "File : " + outFileName + " was successfully encrypted!";
         } catch (Exception ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         endtime = System.currentTimeMillis();
         time = (endtime - starttime);
-        return filedone;
+        return encrypt;
     }
 
     public String decryptAESFromFile(String inputFileName) {

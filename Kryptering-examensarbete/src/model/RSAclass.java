@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.security.InvalidKeyException;
-import java.security.Key;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
@@ -43,7 +42,7 @@ public class RSAclass {
 
     /**
      * Generate key which contains a pair of private and public key using 1024
-     * bytes. Store the set of keys in Private.key and Public.key files.
+     * bytes. Store the set of keys in Prvate.key and Public.key files.
      *
      * @throws NoSuchAlgorithmException
      * @throws IOException
@@ -52,7 +51,7 @@ public class RSAclass {
     public void generateKey() {
         try {
             final KeyPairGenerator keyGen = KeyPairGenerator.getInstance(ALGORITHM);
-            keyGen.initialize(2048);
+            keyGen.initialize(1024);
             final KeyPair key = keyGen.generateKeyPair();
 
             File privateKeyFile = new File(PRIVATE_KEY_FILE);
@@ -200,5 +199,4 @@ public class RSAclass {
         }
         return toReturn;
     }
-   
 }
