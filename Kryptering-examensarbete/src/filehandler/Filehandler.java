@@ -6,15 +6,19 @@
 package filehandler;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
 import javax.crypto.CipherOutputStream;
@@ -40,6 +44,16 @@ public class Filehandler {
         }
 
         return stringBuilder.toString();
+    }
+    public void RSAwriteToFile(String filename,String content)
+    {
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(filename));
+            bw.write(content);
+            bw.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Filehandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public String ReadFromFileAES(File inputFile, File outputFile, Cipher cipher) throws FileNotFoundException, IOException {
