@@ -58,7 +58,7 @@ public class Controller {
     public String EncryptRSAFromFile(String FileName) {
         starttime = System.currentTimeMillis();
         String encryptedtext = "";
-        String newfile = "Encrypted-"+FileName;
+        String newfile = FileName+".RSA";
         try {
             ObjectInputStream inputStream = null;
 
@@ -72,7 +72,7 @@ public class Controller {
         }
         endtime = System.currentTimeMillis();
         time = (endtime - starttime);
-        return encryptedtext;
+        return "File : " + FileName + " was successfully encrypted and saved into "+newfile;
     }
 
     public String decryptRSA(String text) {
@@ -97,7 +97,7 @@ public class Controller {
     public String decryptRSAFromFile(String FileName) {
         starttime = System.currentTimeMillis();
         String plainText = "";
-         String newfile = "Decrypted-"+FileName;
+         String newfile = FileName+".txt";
         try {
             ObjectInputStream inputStream = null;
 
@@ -111,7 +111,7 @@ public class Controller {
         }
          endtime = System.currentTimeMillis();
         time = (endtime - starttime);
-        return plainText;
+        return "File : " + FileName + " was successfully encrypted and saved into "+newfile;
     }
 
     public String encryptAES(String plainText) {
@@ -130,17 +130,17 @@ public class Controller {
     public String encryptAESToFile(String inputFileName) {
         starttime = System.currentTimeMillis();
         String outFileName = inputFileName + ".aes";
-        String encrypt = "";
+        String filedone = "";
         try {
             Cipher cipher = aes.getEncryptedCipher();
             filehandler.WriteToFileAES(new File(inputFileName), new File(outFileName), cipher);
-            encrypt = "File : " + outFileName + " was successfully encrypted!";
+            filedone = "File : " + outFileName + " was successfully encrypted!";
         } catch (Exception ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         endtime = System.currentTimeMillis();
         time = (endtime - starttime);
-        return encrypt;
+        return filedone;
     }
 
     public String decryptAESFromFile(String inputFileName) {
