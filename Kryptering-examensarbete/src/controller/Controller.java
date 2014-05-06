@@ -35,6 +35,10 @@ public class Controller {
         String s = String.valueOf(time);
         return "Time To Encrypt: " + s + " Milliseconds";
     }
+    public String getTimeD() {
+        String s = String.valueOf(time);
+        return "Time To Decrypt: " + s + " Milliseconds";
+    }
 
     public String EncryptRSA(String originalText) {
        if (!areKeysPresent()) {
@@ -129,7 +133,7 @@ public class Controller {
         }
         endtime = System.currentTimeMillis();
         time = (endtime - starttime);
-        return "File : " + FileName + " was successfully encrypted and saved into " + newfile;
+        return "File : " + FileName + " was successfully decrypted and saved into " + newfile;
     }
 
     public String encryptAES(String plainText) {

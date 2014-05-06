@@ -51,7 +51,7 @@ public class RSAclass {
     public void generateKey() {
         try {
             final KeyPairGenerator keyGen = KeyPairGenerator.getInstance(ALGORITHM);
-            keyGen.initialize(1024);
+            keyGen.initialize(2048);
             final KeyPair key = keyGen.generateKeyPair();
 
             File privateKeyFile = new File(PRIVATE_KEY_FILE);
@@ -152,7 +152,7 @@ public class RSAclass {
         // toReturn will hold the total result
         byte[] toReturn = new byte[0];
         // if we encrypt we use 100 byte long blocks. Decryption requires 128 byte long blocks (because of RSA)
-        int length = (mode == Cipher.ENCRYPT_MODE) ? 100 : 128;
+        int length = (mode == Cipher.ENCRYPT_MODE) ? 200 : 256;
 
         // another buffer. this one will hold the bytes that have to be modified in this step
         byte[] buffer = new byte[length];
