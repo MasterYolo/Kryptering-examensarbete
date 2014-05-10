@@ -77,10 +77,9 @@ public class RSAclass {
             // Saving the Private key in a file
             ObjectOutputStream privateKeyOS = new ObjectOutputStream(
                     new FileOutputStream(privateKeyFile));
-            publicKeyOS.writeObject(key.getPublic());
             privateKeyOS.writeObject(key.getPrivate());
-
             privateKeyOS.close();
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
