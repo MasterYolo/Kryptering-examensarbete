@@ -51,7 +51,7 @@ public class RSAclass {
     public void generateKey() {
         try {
             final KeyPairGenerator keyGen = KeyPairGenerator.getInstance(ALGORITHM);
-            keyGen.initialize(2048);
+            keyGen.initialize(4096);
             final KeyPair key = keyGen.generateKeyPair();
 
             File privateKeyFile = new File(PRIVATE_KEY_FILE);
@@ -77,7 +77,9 @@ public class RSAclass {
             // Saving the Private key in a file
             ObjectOutputStream privateKeyOS = new ObjectOutputStream(
                     new FileOutputStream(privateKeyFile));
+            publicKeyOS.writeObject(key.getPublic());
             privateKeyOS.writeObject(key.getPrivate());
+
             privateKeyOS.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -139,7 +141,7 @@ public class RSAclass {
         cipher.init(Cipher.DECRYPT_MODE, key);
         byte[] bts = Hex.decodeHex(encrypted.toCharArray());
 
-        byte[] decrypted = blockCipher(bts, Cipher.DECRYPT_MODE,cipher);
+        byte[] decrypted = blockCipher(bts, Cipher.DECRYPT_MODE, cipher);
 
         return new String(decrypted, "UTF-8");
     }
@@ -152,7 +154,7 @@ public class RSAclass {
         // toReturn will hold the total result
         byte[] toReturn = new byte[0];
         // if we encrypt we use 100 byte long blocks. Decryption requires 128 byte long blocks (because of RSA)
-        int length = (mode == Cipher.ENCRYPT_MODE) ? 200 : 256;
+        int length = (mode == Cipher.ENCRYPT_MODE) ? 400 : 512;
 
         // another buffer. this one will hold the bytes that have to be modified in this step
         byte[] buffer = new byte[length];

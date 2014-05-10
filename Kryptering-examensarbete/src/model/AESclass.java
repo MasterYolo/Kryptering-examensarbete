@@ -20,11 +20,12 @@ public class AESclass {
 
     private static String algorithm = "AES/CTR/NoPadding";
     private static byte[] keyValue = new byte[]{'A', 'S', 'e', 'c', 'u', 'r', 'e', 'S', 'e', 'c', 'r', 'e', 't', 'K', 'e', 'y',};
-    /* Only using this because i want to be able to close down the program and open it again. And im not wanna implement inputoutput streams in this part */
+    
     private byte[] ivBytes = new byte[]{0x00, 0x01, 0x02, 0x03, 0x00, 0x01, 0x02, 0x03, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00, 0x01}; // Can be improved by using secure random. 
+        0x00, 0x00, 0x00, 0x00, 0x01}; 
     private static SecretKeySpec secretKey;
     private IvParameterSpec ivSpec;
+    
     private static byte[] key;
 
     public AESclass() {
